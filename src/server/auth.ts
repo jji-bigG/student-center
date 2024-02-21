@@ -37,13 +37,8 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-  jwt: {
-    // The maximum age of the NextAuth.js issued JWT in seconds.
-    // Defaults to `session.maxAge`.
-    maxAge: 60 * 60 * 24 * 30,
-    // You can define your own encode/decode functions for signing and encryption
-    // async encode() {},
-    // async decode() {},
+  pages: {
+    // signIn: "/auth/signin",
   },
   session: {
     strategy: "jwt",
