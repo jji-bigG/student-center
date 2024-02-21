@@ -37,6 +37,8 @@ interface CreateContextOptions {
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
 const createInnerTRPCContext = ({ session }: CreateContextOptions) => {
+  // define context which does not depend on the user's request
+
   return {
     session,
   };
@@ -54,6 +56,8 @@ export const createTRPCContext = async ({
 }: CreateNextContextOptions) => {
   // Get the session from the server using the getServerSession wrapper function
   const session = await getServerAuthSession({ req, res });
+
+  // define context which depends on the request
 
   return createInnerTRPCContext({
     session,
