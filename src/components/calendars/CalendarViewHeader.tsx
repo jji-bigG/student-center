@@ -8,18 +8,21 @@ import {
 import Link from "next/link";
 import React, { Fragment } from "react";
 
-const viewLinks = {
-  day: "/views/day",
-  week: "/views/week",
-  month: "/",
-  year: "/views/year",
-};
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 function CalendarViewHeader({ viewType }: { viewType: string }) {
+  const viewLinks = {
+    day: "/views/day",
+    week: "/views/week",
+    month: "/",
+    year: "/views/year",
+
+    create: "/views/create",
+    toToday: `/views/${viewType.toLowerCase()}/today`,
+  };
+
   return (
     <header className="flex items-center justify-between border-b border-gray-200 px-6 py-4 lg:flex-none">
       <h1 className="text-base font-semibold leading-6 text-gray-900">
@@ -168,84 +171,84 @@ function CalendarViewHeader({ viewType }: { viewType: string }) {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <Link
+                      href={viewLinks.create}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",
                       )}
                     >
                       Create event
-                    </a>
+                    </Link>
                   )}
                 </Menu.Item>
               </div>
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <Link
+                      href={viewLinks.toToday}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",
                       )}
                     >
                       Go to today
-                    </a>
+                    </Link>
                   )}
                 </Menu.Item>
               </div>
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <Link
+                      href={viewLinks.day}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",
                       )}
                     >
                       Day view
-                    </a>
+                    </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <Link
+                      href={viewLinks.week}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",
                       )}
                     >
                       Week view
-                    </a>
+                    </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <Link
+                      href={viewLinks.month}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",
                       )}
                     >
                       Month view
-                    </a>
+                    </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <Link
+                      href={viewLinks.year}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",
                       )}
                     >
                       Year view
-                    </a>
+                    </Link>
                   )}
                 </Menu.Item>
               </div>

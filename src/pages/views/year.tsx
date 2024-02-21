@@ -1,11 +1,12 @@
 import React from "react";
 import YearView from "../../components/calendars/year_view";
+import DefaultAuth from "~/layouts/DefaultAuth";
 
 function Year() {
   return (
-    <main>
+    <DefaultAuth>
       <YearView />
-    </main>
+    </DefaultAuth>
   );
 }
 
