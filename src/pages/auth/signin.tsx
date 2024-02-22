@@ -179,9 +179,9 @@ export default function SignIn({
               <div className="mt-6 grid grid-cols-2 gap-4">
                 <a
                   href="#"
-                  onClick={(e) => {
+                  onClick={async (e) => {
                     e.preventDefault();
-                    signIn("google");
+                    await signIn("google");
                   }}
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
