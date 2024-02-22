@@ -1,20 +1,7 @@
-// @ts-ignore
-import { Fragment } from "react";
-import {
-  // @ts-ignore
-  ChevronDownIcon,
-  // @ts-ignore
-  ChevronLeftIcon,
-  // @ts-ignore
-  ChevronRightIcon,
-  ClockIcon,
-  // @ts-ignore
-  EllipsisHorizontalIcon,
-} from "@heroicons/react/20/solid";
-// @ts-ignore
-import { Menu, Transition } from "@headlessui/react";
-// @ts-ignore
-import Link from "next/link";
+//
+import { ClockIcon } from "@heroicons/react/20/solid";
+//
+//
 import CalendarViewHeader from "./CalendarViewHeader";
 
 const days = [
@@ -192,7 +179,7 @@ export default function Example() {
                   }
                 >
                   {
-                    // @ts-ignore
+                    //
                     day.date.split("-").pop().replace(/^0/, "")
                   }
                 </time>
@@ -230,7 +217,7 @@ export default function Example() {
                 type="button"
                 className={classNames(
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50",
-                  (day.isSelected || day.isToday) && "font-semibold",
+                  (day.isSelected ?? day.isToday) && "font-semibold",
                   day.isSelected && "text-white",
                   !day.isSelected && day.isToday && "text-indigo-600",
                   !day.isSelected &&
@@ -255,7 +242,7 @@ export default function Example() {
                   )}
                 >
                   {
-                    // @ts-ignore
+                    //
                     day.date.split("-").pop().replace(/^0/, "")
                   }
                 </time>
@@ -276,12 +263,12 @@ export default function Example() {
         </div>
       </div>
       {
-        // @ts-ignore
+        //
         selectedDay?.events.length > 0 && (
           <div className="px-4 py-10 sm:px-6 lg:hidden">
             <ol className="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-sm shadow ring-1 ring-black ring-opacity-5">
               {
-                // @ts-ignore
+                //
                 selectedDay.events.map((event) => (
                   <li
                     key={event.id}

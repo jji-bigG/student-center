@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Fragment } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Menu, Transition } from "@headlessui/react";
@@ -132,7 +131,7 @@ export default function Example() {
                 day.isSelected && day.isToday && "bg-indigo-600",
                 day.isSelected && !day.isToday && "bg-gray-900",
                 !day.isSelected && "hover:bg-gray-200",
-                (day.isSelected || day.isToday) && "font-semibold",
+                (day.isSelected ?? day.isToday) && "font-semibold",
                 "mx-auto flex h-8 w-8 items-center justify-center rounded-full",
               )}
             >

@@ -1,12 +1,3 @@
-// @ts-nocheck
-import { Fragment } from "react";
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  EllipsisHorizontalIcon,
-} from "@heroicons/react/20/solid";
-import { Menu, Transition } from "@headlessui/react";
 import CalendarViewHeader from "./CalendarViewHeader";
 
 const months = [

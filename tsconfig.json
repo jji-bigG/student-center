@@ -36,9 +36,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts",
-    "src/components/calendars/borderless_stacked.jsx",
-    "src/components/calendars/week_view.jsx"
+    "**/*.jsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

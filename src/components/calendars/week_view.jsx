@@ -1,12 +1,4 @@
-// @ts-nocheck
-import { Fragment, useEffect, useRef } from "react";
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  EllipsisHorizontalIcon,
-} from "@heroicons/react/20/solid";
-import { Menu, Transition } from "@headlessui/react";
+import { useEffect, useRef } from "react";
 import CalendarViewHeader from "./CalendarViewHeader";
 
 function classNames(...classes) {

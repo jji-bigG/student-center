@@ -1,12 +1,5 @@
-// @ts-nocheck
-import { Fragment, useEffect, useRef } from "react";
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  EllipsisHorizontalIcon,
-} from "@heroicons/react/20/solid";
-import { Menu, Transition } from "@headlessui/react";
+import { useEffect, useRef } from "react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import CalendarViewHeader from "./CalendarViewHeader";
 
 const days = [
@@ -403,7 +396,7 @@ export default function Example() {
                 className={classNames(
                   "py-1.5 hover:bg-gray-100 focus:z-10",
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50",
-                  (day.isSelected || day.isToday) && "font-semibold",
+                  (day.isSelected ?? day.isToday) && "font-semibold",
                   day.isSelected && "text-white",
                   !day.isSelected &&
                     day.isCurrentMonth &&
