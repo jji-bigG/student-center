@@ -155,7 +155,7 @@ export default function Example() {
               key={meeting.id}
               className="relative flex space-x-6 py-6 xl:static"
             >
-              <img
+              <Image
                 src={meeting.imageUrl}
                 alt=""
                 className="h-14 w-14 flex-none rounded-full"

@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const days = [
   { date: "2021-12-27" },
@@ -152,7 +153,7 @@ export default function Example() {
               key={meeting.id}
               className="group flex items-center space-x-4 rounded-xl px-4 py-2 focus-within:bg-gray-100 hover:bg-gray-100"
             >
-              <img
+              <Image
                 src={meeting.imageUrl}
                 alt=""
                 className="h-10 w-10 flex-none rounded-full"
