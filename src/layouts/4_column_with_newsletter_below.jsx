@@ -112,7 +112,9 @@ export default function Example() {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <Image
             className="h-7"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="/logo.jpg"
+            width={28}
+            height={28}
             alt="Company name"
           />
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">

@@ -56,7 +56,9 @@ export default function SignIn({
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <Image
             className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="/logo.jpg"
+            height={80}
+            width={80}
             alt="Your Company"
           />
           <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
