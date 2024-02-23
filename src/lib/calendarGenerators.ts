@@ -25,11 +25,13 @@ export function formatDateString(date: Date): string {
  * @param today today's date
  */
 export function generateMonth(today: Date) {
+  console.log(today);
   const monthArrangement: MonthlyView[] = [];
   const selected = today.getDate();
 
   // determine how many rows
   const daysRowAbove = today.getDate() - today.getDay();
+  console.log("daysabove", daysRowAbove);
   if (daysRowAbove % 7 !== 0) {
     let above = Math.ceil(daysRowAbove / 7);
     // find the starting day number for that top row
@@ -83,7 +85,6 @@ export function generateMonth(today: Date) {
   //     threshold = 7 * 6;
   //   }
 
-  console.log("Using threshold ", threshold);
   while (monthArrangement.length < Math.min(threshold, 50)) {
     monthArrangement.push({
       date: formatDateString(today),
