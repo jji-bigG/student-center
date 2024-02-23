@@ -34,9 +34,18 @@ interface Props {
   children: ReactNode;
   date: Date;
   setDate: React.Dispatch<React.SetStateAction<Date>>;
+  updateLeft: Function;
+  updateRight: Function;
 }
 
-function CalendarViewHeader({ viewType, children, date, setDate }: Props) {
+function CalendarViewHeader({
+  viewType,
+  children,
+  date,
+  setDate,
+  updateLeft,
+  updateRight,
+}: Props) {
   const viewLinks = {
     day: "/views/day",
     week: "/views/week",
@@ -66,8 +75,7 @@ function CalendarViewHeader({ viewType, children, date, setDate }: Props) {
             <button
               type="button"
               onClick={() => {
-                date.setMonth(date.getMonth() - 1);
-                setDate(new Date(date));
+                updateLeft();
               }}
               className="flex items-center justify-center rounded-l-md py-2 pl-3 pr-4 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50"
             >
@@ -83,10 +91,7 @@ function CalendarViewHeader({ viewType, children, date, setDate }: Props) {
             </button>
             <span className="relative -mx-px h-5 w-px bg-gray-300 md:hidden" />
             <button
-              onClick={() => {
-                date.setMonth(date.getMonth() + 1);
-                setDate(new Date(date));
-              }}
+              onClick={() => updateRight()}
               type="button"
               className="flex items-center justify-center rounded-r-md py-2 pl-4 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50"
             >

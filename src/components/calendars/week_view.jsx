@@ -25,7 +25,19 @@ export default function Example() {
 
   return (
     <div className="flex h-full flex-col">
-      <CalendarViewHeader date={date} setDate={setDate} viewType="Week">
+      <CalendarViewHeader
+        updateLeft={() => {
+          date.setDate(date.getDate() - 7);
+          setDate(new Date(date));
+        }}
+        updateRight={() => {
+          date.setDate(date.getDate() + 7);
+          setDate(new Date(date));
+        }}
+        date={date}
+        setDate={setDate}
+        viewType="Week"
+      >
         <div
           ref={container}
           className="isolate flex flex-auto flex-col overflow-auto bg-white"

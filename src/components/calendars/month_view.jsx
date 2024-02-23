@@ -144,7 +144,19 @@ export default function Example() {
 
   return (
     <div className="lg:flex lg:h-full lg:flex-col">
-      <CalendarViewHeader date={date} setDate={setDate} viewType="Month">
+      <CalendarViewHeader
+        date={date}
+        setDate={setDate}
+        updateLeft={() => {
+          date.setMonth(date.getMonth() - 1);
+          setDate(new Date(date));
+        }}
+        updateRight={() => {
+          date.setMonth(date.getMonth() + 1);
+          setDate(new Date(date));
+        }}
+        viewType="Month"
+      >
         <div className="shadow ring-1 ring-black ring-opacity-5 lg:flex lg:flex-auto lg:flex-col">
           <div className="grid grid-cols-7 gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold leading-6 text-gray-700 lg:flex-none">
             <div className="bg-white py-2">
