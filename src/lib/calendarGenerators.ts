@@ -78,20 +78,20 @@ export function generateMonth(today: Date) {
       date: formatDateString(today),
       isCurrentMonth: true,
       events: [
-        {
-          id: 1,
-          name: "Design review",
-          time: "10AM",
-          datetime: "2022-01-03T10:00",
-          href: "#",
-        },
-        {
-          id: 2,
-          name: "Sales meeting",
-          time: "2PM",
-          datetime: "2022-01-03T14:00",
-          href: "#",
-        },
+        // {
+        //   id: 1,
+        //   name: "Design review",
+        //   time: "10AM",
+        //   datetime: "2022-01-03T10:00",
+        //   href: "#",
+        // },
+        // {
+        //   id: 2,
+        //   name: "Sales meeting",
+        //   time: "2PM",
+        //   datetime: "2022-01-03T14:00",
+        //   href: "#",
+        // },
       ],
       isSelected: today.getDate() === selected,
       isToday: new Date().getDate() === today.getDate(),
@@ -117,4 +117,40 @@ export function generateMonth(today: Date) {
   }
 
   return monthArrangement;
+}
+
+export function generateYearView(year: number) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  // go to that year
+  const date = new Date();
+  date.setFullYear(year);
+
+  // then loop through the months
+  return months.map((m, i) => {
+    date.setMonth(i);
+    console.log("processing month", date);
+    // with that month let's get the list
+    return {
+      name: m,
+      days: generateMonth(date).map((m) => {
+        return {
+          date: m.date,
+          isCurrentMonth: m.isCurrentMonth,
+        };
+      }),
+    };
+  });
 }

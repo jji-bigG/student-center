@@ -49,7 +49,7 @@ function CalendarViewHeader({
   const viewLinks = {
     day: "/views/day",
     week: "/views/week",
-    month: "/",
+    month: "/views/month",
     year: "/views/year",
 
     create: "/views/create",
@@ -83,7 +83,7 @@ function CalendarViewHeader({
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </button>
             <button
-              onClick={() => setDate(new Date())}
+              onClick={() => setDate(new Date(Date.now()))}
               type="button"
               className="hidden px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block"
             >

@@ -2,7 +2,22 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import CalendarViewHeader from "./CalendarView";
 import Link from "next/link";
-import { minutesFromMidnight } from "~/lib/calendarGenerators";
+import { generateMonth, minutesFromMidnight } from "~/lib/calendarGenerators";
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const days = [
   { date: "2021-12-27" },
@@ -392,16 +407,25 @@ export default function Example() {
           <div className="hidden w-1/2 max-w-md flex-none border-l border-gray-100 px-8 py-10 md:block">
             <div className="flex items-center text-center text-gray-900">
               <button
+                onClick={() => {
+                  date.setMonth(date.getMonth() - 1);
+                  setDate(date);
+                }}
                 type="button"
                 className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Previous month</span>
+
                 <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
               </button>
               <div className="flex-auto text-sm font-semibold">
-                January 2022
+                {months[date.getMonth()]} {date.getFullYear()}
               </div>
               <button
+                onClick={() => {
+                  date.setMonth(date.getMonth() + 1);
+                  setDate(date);
+                }}
                 type="button"
                 className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
@@ -419,9 +443,10 @@ export default function Example() {
               <div>S</div>
             </div>
             <div className="isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200">
-              {days.map((day, dayIdx) => (
+              {generateMonth(new Date(date)).map((day, dayIdx) => (
                 <button
                   key={day.date}
+                  onClick={() => setDate()}
                   type="button"
                   className={classNames(
                     "py-1.5 hover:bg-gray-100 focus:z-10",

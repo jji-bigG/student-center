@@ -1,7 +1,8 @@
 import { useState } from "react";
 import CalendarViewHeader from "./CalendarView";
+import { generateYearView } from "~/lib/calendarGenerators";
 
-const months = [
+const monthsDummy = [
   {
     name: "January",
     days: [
@@ -58,6 +59,11 @@ function classNames(...classes) {
 
 export default function Example() {
   const [date, setDate] = useState(new Date());
+
+  // transform months into our data structure to be read
+  // we instead return a json with date and isCurrentMonth
+  const months = generateYearView(date.getFullYear());
+  console.log(months);
 
   return (
     <CalendarViewHeader
