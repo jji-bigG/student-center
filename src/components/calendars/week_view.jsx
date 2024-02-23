@@ -33,15 +33,15 @@ const events = [
     color: "gray",
     day: 2,
   },
-  // {
-  //   title: "Sightseeing",
-  //   href: "#",
-  //   location: "Eiffel Tower",
-  //   startTime: "11:00 AM",
-  //   endTime: "12:30PM",
-  //   color: "indigo",
-  //   day: 2,
-  // },
+  {
+    title: "Sightseeing",
+    href: "#",
+    location: "Eiffel Tower",
+    startTime: "11:00 AM",
+    endTime: "12:30PM",
+    color: "indigo",
+    day: 2,
+  },
 ];
 
 export default function Example() {
@@ -69,6 +69,7 @@ export default function Example() {
           date.setDate(date.getDate() - 7);
           setDate(new Date(date));
         }}
+        today={() => setDate(new Date())}
         updateRight={() => {
           date.setDate(date.getDate() + 7);
           setDate(new Date(date));
@@ -394,7 +395,7 @@ export default function Example() {
                 >
                   {events.map((e, i) => (
                     <li
-                      className={`relative mt-px hidden sm:col-start-${e.day} sm:flex`}
+                      className={`relative mt-px flex sm:col-start-${e.day}`}
                       style={{
                         gridRow: `${minutesFromMidnight(e.startTime) / 5 + 2} / span ${(minutesFromMidnight(e.endTime) - minutesFromMidnight(e.startTime)) / 5}`,
                       }}

@@ -14,7 +14,7 @@ function classNames(...classes) {
 }
 
 const urls = {
-  calendar: "/",
+  calendar: "/views/day",
   courses: "",
   projects: "",
   social: "",

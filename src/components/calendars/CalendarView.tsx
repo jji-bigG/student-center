@@ -9,6 +9,7 @@ import Link from "next/link";
 import React, { Fragment, ReactNode, useState } from "react";
 
 import AddEvent from "./AddEvent";
+import { usePathname } from "next/navigation";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -33,18 +34,19 @@ interface Props {
   viewType: string;
   children: ReactNode;
   date: Date;
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
+  // setDate: React.Dispatch<React.SetStateAction<Date>>;
   updateLeft: Function;
   updateRight: Function;
+  today: Function;
 }
 
 function CalendarViewHeader({
   viewType,
   children,
   date,
-  setDate,
   updateLeft,
   updateRight,
+  today,
 }: Props) {
   const viewLinks = {
     day: "/views/day",
@@ -56,13 +58,12 @@ function CalendarViewHeader({
     toToday: `/views/${viewType.toLowerCase()}/today`,
   };
 
-  // const [date, setDate] = useState(new Date());
-
+  const path = usePathname();
   return (
     <div>
       <header className="flex items-center justify-between border-b border-gray-200 px-6 py-4 lg:flex-none">
         <h1 className="text-base font-semibold leading-6 text-gray-900">
-          <time dateTime="2022-01">
+          <time dateTime={`${date.getFullYear()}-${date.getMonth() + 1}`}>
             {monthNames[date.getMonth()]} {date.getDate()}, {date.getFullYear()}
           </time>
         </h1>
@@ -83,7 +84,7 @@ function CalendarViewHeader({
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </button>
             <button
-              onClick={() => setDate(new Date(Date.now()))}
+              onClick={() => today()}
               type="button"
               className="hidden px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block"
             >

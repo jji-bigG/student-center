@@ -71,6 +71,7 @@ export default function Example() {
         date.setFullYear(date.getFullYear() - 1);
         setDate(new Date(date));
       }}
+      today={() => setDate(new Date())}
       updateRight={() => {
         date.setFullYear(date.getFullYear() + 1);
         setDate(new Date(date));

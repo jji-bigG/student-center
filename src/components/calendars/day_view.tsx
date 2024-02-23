@@ -1,8 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import CalendarViewHeader from "./CalendarView";
 import Link from "next/link";
-import { generateMonth, minutesFromMidnight } from "~/lib/calendarGenerators";
+import {
+  essentialGenerateMonth,
+  formatDateString,
+  generateMonth,
+  minutesFromMidnight,
+} from "~/lib/calendarGenerators";
+import { useRouter } from "next/router";
 
 const months = [
   "January",
@@ -19,54 +25,9 @@ const months = [
   "December",
 ];
 
-const days = [
-  { date: "2021-12-27" },
-  { date: "2021-12-28" },
-  { date: "2021-12-29" },
-  { date: "2021-12-30" },
-  { date: "2021-12-31" },
-  { date: "2022-01-01", isCurrentMonth: true },
-  { date: "2022-01-02", isCurrentMonth: true },
-  { date: "2022-01-03", isCurrentMonth: true },
-  { date: "2022-01-04", isCurrentMonth: true },
-  { date: "2022-01-05", isCurrentMonth: true },
-  { date: "2022-01-06", isCurrentMonth: true },
-  { date: "2022-01-07", isCurrentMonth: true },
-  { date: "2022-01-08", isCurrentMonth: true },
-  { date: "2022-01-09", isCurrentMonth: true },
-  { date: "2022-01-10", isCurrentMonth: true },
-  { date: "2022-01-11", isCurrentMonth: true },
-  { date: "2022-01-12", isCurrentMonth: true },
-  { date: "2022-01-13", isCurrentMonth: true },
-  { date: "2022-01-14", isCurrentMonth: true },
-  { date: "2022-01-15", isCurrentMonth: true },
-  { date: "2022-01-16", isCurrentMonth: true },
-  { date: "2022-01-17", isCurrentMonth: true },
-  { date: "2022-01-18", isCurrentMonth: true },
-  { date: "2022-01-19", isCurrentMonth: true },
-  { date: "2022-01-20", isCurrentMonth: true, isToday: true },
-  { date: "2022-01-21", isCurrentMonth: true },
-  { date: "2022-01-22", isCurrentMonth: true, isSelected: true },
-  { date: "2022-01-23", isCurrentMonth: true },
-  { date: "2022-01-24", isCurrentMonth: true },
-  { date: "2022-01-25", isCurrentMonth: true },
-  { date: "2022-01-26", isCurrentMonth: true },
-  { date: "2022-01-27", isCurrentMonth: true },
-  { date: "2022-01-28", isCurrentMonth: true },
-  { date: "2022-01-29", isCurrentMonth: true },
-  { date: "2022-01-30", isCurrentMonth: true },
-  { date: "2022-01-31", isCurrentMonth: true },
-  { date: "2022-02-01" },
-  { date: "2022-02-02" },
-  { date: "2022-02-03" },
-  { date: "2022-02-04" },
-  { date: "2022-02-05" },
-  { date: "2022-02-06" },
-];
-
 const events = [
   {
-    title: "kill niggas",
+    title: "breakfast",
     href: "#",
     startTime: "6:00 AM",
     endTime: "7:00 AM",
@@ -91,7 +52,7 @@ const events = [
   },
 ];
 
-function classNames(...classes) {
+function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -101,13 +62,18 @@ export default function Example() {
   const containerOffset = useRef(null);
 
   const [date, setDate] = useState(new Date());
+  let days = useMemo(() => generateMonth(new Date(date)), [date]);
 
   useEffect(() => {
     // Set the container scroll position based on the current time.
     const currentMinute = new Date().getHours() * 60;
+    // @ts-ignore
     container.current.scrollTop =
+      // @ts-ignore
       ((container.current.scrollHeight -
+        // @ts-ignore
         containerNav.current.offsetHeight -
+        // @ts-ignore
         containerOffset.current.offsetHeight) *
         currentMinute) /
       1440;
@@ -115,17 +81,18 @@ export default function Example() {
 
   return (
     <div className="flex h-full flex-col">
+      {/* {JSON.stringify(days)} */}
       <CalendarViewHeader
         updateLeft={() => {
           date.setDate(date.getDate() - 1);
           setDate(new Date(date));
         }}
+        today={() => setDate(new Date())}
         updateRight={() => {
           date.setDate(date.getDate() + 1);
           setDate(new Date(date));
         }}
         date={date}
-        setDate={setDate}
         viewType="Day"
       >
         <div className="isolate flex flex-auto overflow-hidden bg-white">
@@ -409,7 +376,7 @@ export default function Example() {
               <button
                 onClick={() => {
                   date.setMonth(date.getMonth() - 1);
-                  setDate(date);
+                  setDate(new Date(date));
                 }}
                 type="button"
                 className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
@@ -424,7 +391,7 @@ export default function Example() {
               <button
                 onClick={() => {
                   date.setMonth(date.getMonth() + 1);
-                  setDate(date);
+                  setDate(new Date(date));
                 }}
                 type="button"
                 className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
@@ -443,10 +410,10 @@ export default function Example() {
               <div>S</div>
             </div>
             <div className="isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200">
-              {generateMonth(new Date(date)).map((day, dayIdx) => (
+              {days.map((day, dayIdx) => (
                 <button
                   key={day.date}
-                  onClick={() => setDate()}
+                  onClick={() => setDate((cDate) => new Date(day.date))}
                   type="button"
                   className={classNames(
                     "py-1.5 hover:bg-gray-100 focus:z-10",
@@ -476,7 +443,11 @@ export default function Example() {
                       day.isSelected && !day.isToday && "bg-gray-900",
                     )}
                   >
-                    {day.date.split("-").pop().replace(/^0/, "")}
+                    {/* {new Date(day.date).getDate()} */}
+                    {
+                      // @ts-ignore
+                      day.date.split("-").pop().replace(/^0/, "")
+                    }
                   </time>
                 </button>
               ))}
