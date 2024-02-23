@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import CalendarViewHeader from "./CalendarViewHeader";
+import CalendarViewHeader from "./CalendarView";
 
 const days = [
   { date: "2021-12-27" },

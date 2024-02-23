@@ -2,9 +2,11 @@
 import { ClockIcon } from "@heroicons/react/20/solid";
 //
 //
-import CalendarViewHeader from "./CalendarViewHeader";
+import CalendarViewHeader from "./CalendarView";
+import { formatDateString, generateMonth } from "~/lib/calendarGenerators";
+import { useState } from "react";
 
-const days = [
+const daysDummy = [
   { date: "2021-12-27", events: [] },
   { date: "2021-12-28", events: [] },
   { date: "2021-12-29", events: [] },
@@ -123,7 +125,6 @@ const days = [
   { date: "2022-02-05", events: [] },
   { date: "2022-02-06", events: [] },
 ];
-const selectedDay = days.find((day) => day.isSelected);
 
 /**
  * @param {(string | boolean | undefined)[]} classes
@@ -133,9 +134,17 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const [date, setDate] = useState(new Date());
+  const days = generateMonth(date);
+  // const days = daysDummy;
+  const selectedDay = days.find((day) => day.isSelected);
+  console.log(days);
+  console.log(selectedDay);
+
   return (
     <div className="lg:flex lg:h-full lg:flex-col">
-      <CalendarViewHeader viewType="Month" />
+      <CalendarViewHeader date={date} setDate={setDate} viewType="Month" />
+
       <div className="shadow ring-1 ring-black ring-opacity-5 lg:flex lg:flex-auto lg:flex-col">
         <div className="grid grid-cols-7 gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold leading-6 text-gray-700 lg:flex-none">
           <div className="bg-white py-2">

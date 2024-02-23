@@ -6,7 +6,7 @@ import {
   EllipsisHorizontalIcon,
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 import AddEvent from "./AddEvent";
 
@@ -14,7 +14,26 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-function CalendarViewHeader({ viewType }: { viewType: string }) {
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+interface Props {
+  viewType: string;
+}
+
+function CalendarViewHeader({ viewType }: Props) {
   const viewLinks = {
     day: "/views/day",
     week: "/views/week",
@@ -25,10 +44,14 @@ function CalendarViewHeader({ viewType }: { viewType: string }) {
     toToday: `/views/${viewType.toLowerCase()}/today`,
   };
 
+  const [date, setDate] = useState(new Date());
+
   return (
     <header className="flex items-center justify-between border-b border-gray-200 px-6 py-4 lg:flex-none">
       <h1 className="text-base font-semibold leading-6 text-gray-900">
-        <time dateTime="2022-01">January 2022</time>
+        <time dateTime="2022-01">
+          {monthNames[date.getMonth()]} {date.getDate()}, {date.getFullYear()}
+        </time>
       </h1>
       <div className="flex items-center">
         <div className="relative flex items-center rounded-md bg-white shadow-sm md:items-stretch">
@@ -38,12 +61,17 @@ function CalendarViewHeader({ viewType }: { viewType: string }) {
           />
           <button
             type="button"
+            onClick={() => {
+              date.setMonth(date.getMonth() - 1);
+              setDate(new Date(date));
+            }}
             className="flex items-center justify-center rounded-l-md py-2 pl-3 pr-4 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50"
           >
             <span className="sr-only">Previous {viewType}</span>
             <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
           </button>
           <button
+            onClick={() => setDate(new Date())}
             type="button"
             className="hidden px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block"
           >
@@ -51,6 +79,10 @@ function CalendarViewHeader({ viewType }: { viewType: string }) {
           </button>
           <span className="relative -mx-px h-5 w-px bg-gray-300 md:hidden" />
           <button
+            onClick={() => {
+              date.setMonth(date.getMonth() + 1);
+              setDate(new Date(date));
+            }}
             type="button"
             className="flex items-center justify-center rounded-r-md py-2 pl-4 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50"
           >

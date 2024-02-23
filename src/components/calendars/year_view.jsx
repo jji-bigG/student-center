@@ -1,4 +1,4 @@
-import CalendarViewHeader from "./CalendarViewHeader";
+import CalendarViewHeader from "./CalendarView";
 
 const months = [
   {

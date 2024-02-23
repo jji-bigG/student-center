@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import CalendarViewHeader from "./CalendarViewHeader";
+import CalendarViewHeader from "./CalendarView";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
