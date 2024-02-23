@@ -5,6 +5,7 @@ import React, { ReactNode, useEffect } from "react";
 import NavSimple from "./simple";
 import Footer from "./4_column_with_newsletter_below";
 import { redirect } from "next/navigation";
+import DatePickerWithTime from "~/components/inputs/DatePickerWithTime";
 
 function DefaultAuth({ children }: { children: ReactNode }) {
   const { data } = useSession({ required: true });

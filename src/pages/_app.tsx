@@ -5,18 +5,19 @@ import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
-import { AppCacheProvider } from "@mui/material-nextjs/v13-pagesRouter";
+import PrelineScript from "~/components/PrelineScript";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <AppCacheProvider {...pageProps}>
+    <>
       <SessionProvider session={session}>
         <Component {...pageProps} />
+        <PrelineScript />
       </SessionProvider>
-    </AppCacheProvider>
+    </>
   );
 };
 

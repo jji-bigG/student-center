@@ -7,11 +7,12 @@ import {
   EnvelopeOpenIcon,
 } from "@heroicons/react/24/outline";
 
-import Input from "~/components/inputs/input_with_overlapping_label";
-import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
+import Input from "~/components/inputs/input_with_inset_label";
+import DateTextField from "../inputs/DateTextField";
+import TimeInput from "../inputs/TimeInput";
 
 export default function Example({ children }: { children: ReactNode }) {
-  const [dates, setDates] = useState<DateValueType>(null);
+  const [date, setDate] = useState("");
 
   return (
     <Popover className="relative">
@@ -40,15 +41,26 @@ export default function Example({ children }: { children: ReactNode }) {
               </h3>
 
               <div className="mt-5">
-                <Input label="Event Title" />
-                <h5>Select dates</h5>
-                <div className="z-20">
-                  <Datepicker
-                    classNames={{}}
-                    value={dates}
-                    onChange={(v) => setDates(v)}
+                <div className="mt-0">
+                  <Input label="Title" placeholder="Dinner @ 6" />
+                </div>
+                <div className="mt-3">
+                  <DateTextField
+                    setValue={setDate}
+                    label="Event Date"
+                    placeholder="mm/dd/yyyy"
                   />
                 </div>
+                <div className="mt-3 grid grid-flow-col justify-evenly">
+                  <TimeInput label="Start Time" />
+                  <TimeInput label="End Time" />
+                </div>
+                <div className="mt-3">
+                  <Input label="Location" placeholder="my dorm room" />
+                </div>
+
+                {/* <DatePicker /> */}
+                {/* <DatePickerWithTime /> */}
               </div>
             </div>
 
