@@ -14,6 +14,7 @@ interface MonthlyView {
   isCurrentMonth: boolean;
   events: Events[];
   isSelected: boolean;
+  isToday: boolean;
 }
 
 export function formatDateString(date: Date): string {
@@ -25,13 +26,11 @@ export function formatDateString(date: Date): string {
  * @param today today's date
  */
 export function generateMonth(today: Date) {
-  console.log(today);
   const monthArrangement: MonthlyView[] = [];
   const selected = today.getDate();
 
   // determine how many rows
   const daysRowAbove = today.getDate() - today.getDay();
-  console.log("daysabove", daysRowAbove);
   if (daysRowAbove % 7 !== 0) {
     const above = Math.ceil(daysRowAbove / 7);
     // find the starting day number for that top row
@@ -47,6 +46,7 @@ export function generateMonth(today: Date) {
         isCurrentMonth: false,
         events: [],
         isSelected: false,
+        isToday: false,
       });
       today.setDate(today.getDate() + 1);
     }
@@ -76,6 +76,7 @@ export function generateMonth(today: Date) {
         },
       ],
       isSelected: today.getDate() === selected,
+      isToday: new Date().getDate() === today.getDate(),
     });
     today.setDate(today.getDate() + 1);
   }
@@ -92,6 +93,7 @@ export function generateMonth(today: Date) {
       isCurrentMonth: false,
       events: [],
       isSelected: false,
+      isToday: false,
     });
     today.setDate(today.getDate() + 1);
   }

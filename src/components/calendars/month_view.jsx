@@ -138,6 +138,7 @@ export default function Example() {
 
   const days = generateMonth(new Date(date));
   // const days = daysDummy;
+  console.log(days);
   const selectedDay = days.find((day) => day.isSelected);
   // console.log(days);
   // console.log(selectedDay);
@@ -240,7 +241,7 @@ export default function Example() {
                   type="button"
                   className={classNames(
                     day.isCurrentMonth ? "bg-white" : "bg-gray-50",
-                    (day.isSelected ??
+                    (day.isSelected ||
                       day.date == formatDateString(new Date())) &&
                       "font-semibold",
                     day.isSelected && "text-white",
@@ -256,6 +257,7 @@ export default function Example() {
                     "flex h-14 flex-col px-3 py-2 hover:bg-gray-100 focus:z-10",
                   )}
                 >
+                  {/* setting the actual digits, so it must be here */}
                   <time
                     dateTime={day.date}
                     className={classNames(
@@ -266,11 +268,9 @@ export default function Example() {
                       "ml-auto",
                     )}
                   >
-                    {
-                      //
-                      day.date.split("-").pop().replace(/^0/, "")
-                    }
+                    {day.date.split("-").pop().replace(/^0/, "")}
                   </time>
+
                   <span className="sr-only">{day.events.length} events</span>
                   {day.events.length > 0 && (
                     <span className="-mx-0.5 mt-auto flex flex-wrap-reverse">
