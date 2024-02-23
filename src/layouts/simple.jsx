@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  * @param {string[]} classes
@@ -10,6 +11,13 @@ import Image from "next/image";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+
+const urls = {
+  calendar: "/",
+  courses: "",
+  projects: "",
+  social: "",
+};
 
 export default function Example() {
   return (
@@ -37,30 +45,30 @@ export default function Example() {
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  <a
-                    href="#"
+                  <Link
+                    href={urls.calendar}
                     className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
                   >
                     Calendar
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    href={urls.courses}
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   >
                     Courses
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    href={urls.projects}
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   >
                     Projects
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    href={urls.social}
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   >
                     Social
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -98,7 +106,7 @@ export default function Example() {
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
+                          <Link
                             href="#"
                             className={classNames(
                               active ? "bg-gray-100" : "",
@@ -106,20 +114,20 @@ export default function Example() {
                             )}
                           >
                             Your Profile
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <Link
+                            href="/profile/settings"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700",
                             )}
                           >
                             Settings
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
@@ -214,8 +222,8 @@ export default function Example() {
               </div>
               <div className="mt-3 space-y-1">
                 <Disclosure.Button
-                  as="a"
-                  href="#"
+                  as={Link}
+                  href="/profile"
                   className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
                 >
                   Your Profile
