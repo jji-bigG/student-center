@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 /*
   This example requires some changes to your config:
   

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import CalendarViewHeader from "./CalendarView";
 
@@ -56,6 +56,8 @@ export default function Example() {
   const containerNav = useRef(null);
   const containerOffset = useRef(null);
 
+  const [date, setDate] = useState(new Date());
+
   useEffect(() => {
     // Set the container scroll position based on the current time.
     const currentMinute = new Date().getHours() * 60;
@@ -69,7 +71,7 @@ export default function Example() {
 
   return (
     <div className="flex h-full flex-col">
-      <CalendarViewHeader viewType="Day">
+      <CalendarViewHeader date={date} setDate={setDate} viewType="Day">
         <div className="isolate flex flex-auto overflow-hidden bg-white">
           <div
             ref={container}

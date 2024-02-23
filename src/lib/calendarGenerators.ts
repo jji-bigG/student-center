@@ -17,7 +17,7 @@ interface MonthlyView {
 }
 
 export function formatDateString(date: Date): string {
-  return date.toISOString().split("T")[0] as string;
+  return date.toISOString().split("T")[0]!;
 }
 
 /**
@@ -33,9 +33,9 @@ export function generateMonth(today: Date) {
   const daysRowAbove = today.getDate() - today.getDay();
   console.log("daysabove", daysRowAbove);
   if (daysRowAbove % 7 !== 0) {
-    let above = Math.ceil(daysRowAbove / 7);
+    const above = Math.ceil(daysRowAbove / 7);
     // find the starting day number for that top row
-    let diff = above * 7 - daysRowAbove;
+    const diff = above * 7 - daysRowAbove;
     today.setDate(0); // go to the past month
     today.setDate(today.getDate() - diff + 1);
 
@@ -80,7 +80,7 @@ export function generateMonth(today: Date) {
   }
 
   // we keep adding when we reach the thresholds
-  let threshold = 7 * 6;
+  const threshold = 7 * 6;
   //   if (monthArrangement.length > 7 * 5) {
   //     threshold = 7 * 6;
   //   }

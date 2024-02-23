@@ -228,7 +228,9 @@ export default function Example() {
                   type="button"
                   className={classNames(
                     day.isCurrentMonth ? "bg-white" : "bg-gray-50",
-                    (day.isSelected ?? day.isToday) && "font-semibold",
+                    (day.isSelected ??
+                      day.date == formatDateString(new Date())) &&
+                      "font-semibold",
                     day.isSelected && "text-white",
                     !day.isSelected && day.isToday && "text-indigo-600",
                     !day.isSelected &&

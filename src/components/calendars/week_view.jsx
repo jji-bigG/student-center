@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import CalendarViewHeader from "./CalendarView";
 
 function classNames(...classes) {
@@ -9,6 +9,8 @@ export default function Example() {
   const container = useRef(null);
   const containerNav = useRef(null);
   const containerOffset = useRef(null);
+
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     // Set the container scroll position based on the current time.
@@ -23,7 +25,7 @@ export default function Example() {
 
   return (
     <div className="flex h-full flex-col">
-      <CalendarViewHeader viewType="Week">
+      <CalendarViewHeader date={date} setDate={setDate} viewType="Week">
         <div
           ref={container}
           className="isolate flex flex-auto flex-col overflow-auto bg-white"
