@@ -53,6 +53,7 @@ export function generateMonth(today: Date) {
   }
 
   // insert this entire month
+  today.setDate(1);
   const month = today.getMonth();
   while (today.getMonth() == month) {
     monthArrangement.push({

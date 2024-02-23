@@ -4,6 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 /**
  * @param {string[]} classes
@@ -20,6 +21,8 @@ const urls = {
 };
 
 export default function Example() {
+  const { push } = useRouter();
+
   return (
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
@@ -27,16 +30,19 @@ export default function Example() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between">
               <div className="flex">
-                <div className="flex flex-shrink-0 items-center">
+                <div
+                  onClick={() => push("/")}
+                  className="flex flex-shrink-0 items-center"
+                >
                   <Image
-                    className="block h-8 w-auto lg:hidden"
+                    className="block h-8 w-auto hover:cursor-pointer lg:hidden"
                     src="/logo.jpg"
                     width={100}
                     height={100}
                     alt="Your Company"
                   />
                   <Image
-                    className="hidden h-8 w-auto lg:block"
+                    className="hidden h-8 w-auto hover:cursor-pointer lg:block"
                     src="/logo.jpg"
                     width={100}
                     height={100}
