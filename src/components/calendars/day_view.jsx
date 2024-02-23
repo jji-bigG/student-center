@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import CalendarViewHeader from "./CalendarView";
+import Link from "next/link";
+import { minutesFromMidnight } from "~/lib/calendarGenerators";
 
 const days = [
   { date: "2021-12-27" },
@@ -45,6 +47,33 @@ const days = [
   { date: "2022-02-04" },
   { date: "2022-02-05" },
   { date: "2022-02-06" },
+];
+
+const events = [
+  {
+    title: "kill niggas",
+    href: "#",
+    startTime: "6:00 AM",
+    endTime: "7:00 AM",
+    location: "Somewhere",
+    color: "blue",
+  },
+  {
+    title: "Flight to Paris",
+    href: "#",
+    location: "John F. Kennedy International Airport",
+    startTime: "7:30 AM",
+    endTime: "10:00 AM",
+    color: "pink",
+  },
+  {
+    title: "Sightseeing",
+    href: "#",
+    location: "Eiffel Tower",
+    startTime: "11:00 AM",
+    endTime: "12:30PM",
+    color: "indigo",
+  },
 ];
 
 function classNames(...classes) {
@@ -323,60 +352,39 @@ export default function Example() {
                       "1.75rem repeat(288, minmax(0, 1fr)) auto",
                   }}
                 >
-                  <li
-                    className="relative mt-px flex"
-                    style={{ gridRow: "74 / span 12" }}
-                  >
-                    <a
-                      href="#"
-                      className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
+                  {events.map((e, i) => (
+                    <li
+                      className="relative mt-px flex"
+                      style={{
+                        gridRow: `${minutesFromMidnight(e.startTime) / 5 + 2} / span ${(minutesFromMidnight(e.endTime) - minutesFromMidnight(e.startTime)) / 5}`,
+                      }}
+                      key={i}
                     >
-                      <p className="order-1 font-semibold text-blue-700">
-                        Breakfast
-                      </p>
-                      <p className="text-blue-500 group-hover:text-blue-700">
-                        <time dateTime="2022-01-22T06:00">6:00 AM</time>
-                      </p>
-                    </a>
-                  </li>
-                  <li
-                    className="relative mt-px flex"
-                    style={{ gridRow: "92 / span 30" }}
-                  >
-                    <a
-                      href="#"
-                      className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
-                    >
-                      <p className="order-1 font-semibold text-pink-700">
-                        Flight to Paris
-                      </p>
-                      <p className="order-1 text-pink-500 group-hover:text-pink-700">
-                        John F. Kennedy International Airport
-                      </p>
-                      <p className="text-pink-500 group-hover:text-pink-700">
-                        <time dateTime="2022-01-22T07:30">7:30 AM</time>
-                      </p>
-                    </a>
-                  </li>
-                  <li
-                    className="relative mt-px flex"
-                    style={{ gridRow: "134 / span 18" }}
-                  >
-                    <a
-                      href="#"
-                      className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-indigo-50 p-2 text-xs leading-5 hover:bg-indigo-100"
-                    >
-                      <p className="order-1 font-semibold text-indigo-700">
-                        Sightseeing
-                      </p>
-                      <p className="order-1 text-indigo-500 group-hover:text-indigo-700">
-                        Eiffel Tower
-                      </p>
-                      <p className="text-indigo-500 group-hover:text-indigo-700">
-                        <time dateTime="2022-01-22T11:00">11:00 AM</time>
-                      </p>
-                    </a>
-                  </li>
+                      <Link
+                        href={e.href}
+                        className={`group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-${e.color}-50 p-2 text-xs leading-5 hover:bg-${e.color}-100`}
+                      >
+                        <p
+                          className={`order-1 font-semibold text-${e.color}-700`}
+                        >
+                          {e.title}
+                        </p>
+                        {e.location && (
+                          <p
+                            className={`order-1 text-${e.color}-500 group-hover:text-${e.color}-700`}
+                          >
+                            {e.location}
+                          </p>
+                        )}
+
+                        <p
+                          className={`text-${e.color}-500 group-hover:text-${e.color}-700`}
+                        >
+                          <time dateTime="2022-01-22T06:00">{e.startTime}</time>
+                        </p>
+                      </Link>
+                    </li>
+                  ))}
                 </ol>
               </div>
             </div>

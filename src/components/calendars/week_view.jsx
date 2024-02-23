@@ -1,9 +1,48 @@
 import { useEffect, useRef, useState } from "react";
 import CalendarViewHeader from "./CalendarView";
+import { minutesFromMidnight } from "~/lib/calendarGenerators";
+import Link from "next/link";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+
+const events = [
+  {
+    title: "Flight to Paris",
+    href: "#",
+    location: "John F. Kennedy International Airport",
+    startTime: "7:30 AM",
+    endTime: "10:00 AM",
+    color: "pink",
+    day: 3,
+  },
+  {
+    title: "Breakfast",
+    href: "#",
+    startTime: "6:00 AM",
+    endTime: "7:00 AM",
+    color: "blue",
+    day: 3,
+  },
+  {
+    title: "Meeting with design team at Disney",
+    href: "#",
+    startTime: "10:00 AM",
+    endTime: "12:00 PM",
+    color: "gray",
+    day: 2,
+  },
+  // {
+  //   title: "Sightseeing",
+  //   href: "#",
+  //   location: "Eiffel Tower",
+  //   startTime: "11:00 AM",
+  //   endTime: "12:30PM",
+  //   color: "indigo",
+  //   day: 2,
+  // },
+];
 
 export default function Example() {
   const container = useRef(null);
@@ -353,54 +392,39 @@ export default function Example() {
                       "1.75rem repeat(288, minmax(0, 1fr)) auto",
                   }}
                 >
-                  <li
-                    className="relative mt-px flex sm:col-start-3"
-                    style={{ gridRow: "74 / span 12" }}
-                  >
-                    <a
-                      href="#"
-                      className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
+                  {events.map((e, i) => (
+                    <li
+                      className={`relative mt-px hidden sm:col-start-${e.day} sm:flex`}
+                      style={{
+                        gridRow: `${minutesFromMidnight(e.startTime) / 5 + 2} / span ${(minutesFromMidnight(e.endTime) - minutesFromMidnight(e.startTime)) / 5}`,
+                      }}
+                      key={i}
                     >
-                      <p className="order-1 font-semibold text-blue-700">
-                        Breakfast
-                      </p>
-                      <p className="text-blue-500 group-hover:text-blue-700">
-                        <time dateTime="2022-01-12T06:00">6:00 AM</time>
-                      </p>
-                    </a>
-                  </li>
-                  <li
-                    className="relative mt-px flex sm:col-start-3"
-                    style={{ gridRow: "92 / span 30" }}
-                  >
-                    <a
-                      href="#"
-                      className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
-                    >
-                      <p className="order-1 font-semibold text-pink-700">
-                        Flight to Paris
-                      </p>
-                      <p className="text-pink-500 group-hover:text-pink-700">
-                        <time dateTime="2022-01-12T07:30">7:30 AM</time>
-                      </p>
-                    </a>
-                  </li>
-                  <li
-                    className="relative mt-px hidden sm:col-start-6 sm:flex"
-                    style={{ gridRow: "122 / span 24" }}
-                  >
-                    <a
-                      href="#"
-                      className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-gray-100 p-2 text-xs leading-5 hover:bg-gray-200"
-                    >
-                      <p className="order-1 font-semibold text-gray-700">
-                        Meeting with design team at Disney
-                      </p>
-                      <p className="text-gray-500 group-hover:text-gray-700">
-                        <time dateTime="2022-01-15T10:00">10:00 AM</time>
-                      </p>
-                    </a>
-                  </li>
+                      <Link
+                        href={e.href}
+                        className={`group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-${e.color}-50 p-2 text-xs leading-5 hover:bg-${e.color}-100`}
+                      >
+                        <p
+                          className={`order-1 font-semibold text-${e.color}-700`}
+                        >
+                          {e.title}
+                        </p>
+                        {e.location && (
+                          <p
+                            className={`order-1 text-${e.color}-500 group-hover:text-${e.color}-700`}
+                          >
+                            {e.location}
+                          </p>
+                        )}
+
+                        <p
+                          className={`text-${e.color}-500 group-hover:text-${e.color}-700`}
+                        >
+                          <time dateTime="2022-01-22T06:00">{e.startTime}</time>
+                        </p>
+                      </Link>
+                    </li>
+                  ))}
                 </ol>
               </div>
             </div>

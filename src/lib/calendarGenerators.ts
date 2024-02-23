@@ -17,6 +17,24 @@ interface MonthlyView {
   isToday: boolean;
 }
 
+export function minutesFromMidnight(t: string) {
+  // "6:00 AM" must be in this exact format of the string
+  const s = t.split(" ");
+  const time = s[0] as string;
+  const meridiem = s[1] as string;
+
+  // the time component of the string from 00:00
+  const [hr, min] = time.split(":");
+  // @ts-ignore
+  let mins = Number.parseInt(hr) * 60 + Number.parseInt(min);
+
+  if (meridiem?.toLowerCase() === "PM") {
+    mins += 12 * 60;
+  }
+
+  return mins;
+}
+
 export function formatDateString(date: Date): string {
   return date.toISOString().split("T")[0]!;
 }
